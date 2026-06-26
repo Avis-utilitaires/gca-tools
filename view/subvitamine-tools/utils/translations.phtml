@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<h3>Generation des fichiers gettext</h3>
+
+			<p>Cet outils permet de générer les fichiers binaires ".mo" à partir de fichier ".po"</p>
+
+			<p>L'outil va chercher les dossiers de traductions dans la configuration :</p>
+			<pre>
+'translator' => array(
+	'translation_file_patterns' => array(...)
+)
+			</pre>
+			<button type="button" class="btn btn-primary" onclick="generateMos('all')">Tout générer</button>
+		</div>
+		<div>
+			<script type="text/javascript">
+				var generateMos = function (id) {
+					$.ajax({
+						"method": 'POST',
+						"url": '<?php echo $this->url('tools', array('controller' => 'utils', 'action' => 'translations-convert')); ?>',
+						"data": {index: id},
+						"dataType": 'html',
+						"beforeSend": function () {
+							$('div.result').html('');
+							$('.wait').removeClass('hide');
+						},
+						"complete": function () {
+							$('.wait').addClass('hide');
+						},
+						"success": function (response) {
+							$('div.result').html(response);
+						}
+					});
+				}
+			</script>
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Chemin</th>
+					<th>Nb de fichier .po</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->toconvert as $i => $path) { ?>
+					<tr>
+						<td><?php echo realpath($path); ?></td>
+						<td><?php echo \General\Utils\Filesystem\Dir::countFiles($path, array('mo')); ?></td>
+						<td>
+							<button class="btn" onclick="generateMos(<?php echo $i ?>)">Générer</button>
+						</td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+			<div class="text-center">
+				<span class="wait fa fa-cog fa-spin fa-5x hide">
+			</div>
+			<div class="result">
+			</div>
+		</div>
+	</div>
+</div>

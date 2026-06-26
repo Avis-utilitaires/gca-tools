@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<h3>Gestion des caches</h3>
+
+			<p>Cet outils permet de gérer les différents caches de type fichiers de l'application</p>
+
+			<p>Les caches sont à déclarer dans <code>module.config.php</code> :</p>
+			<pre>
+'caches' => array(
+	'type' => 'Filesystem',
+	'path' => 'PATH/TO/CACHE/DIR'
+)
+			</pre>
+
+		</div>
+		<div>
+			<script type="text/javascript">
+				var emptyCache = function (id) {
+					$.ajax({
+						"method": 'POST',
+						"url": '<?php echo $this->url('tools', array('controller' => 'caches', 'action' => 'empty')); ?>',
+						"data": {index: id},
+						"dataType": 'html',
+						"beforeSend": function () {
+							$('div.result').html('');
+							$('.wait').removeClass('hide');
+						},
+						"complete": function () {
+							$('.wait').addClass('hide');
+						},
+						"success": function (response) {
+							$('div.result').html(response);
+						}
+					});
+				}
+			</script>
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Chemin</th>
+					<th>Taille</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->caches as $i => $cache) { ?>
+					<tr>
+						<td><?php echo realpath($cache['path']); ?></td>
+						<td><?php echo \General\Utils\Filesystem\Dir::dirSize($cache['path'], true); ?></td>
+						<td>
+							<button class="btn btn-danger" onclick="emptyCache(<?php echo $i ?>)">Vider</button>
+						</td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+			<div class="text-center">
+				<span class="wait fa fa-cog fa-spin fa-5x hide">
+			</div>
+			<div class="result">
+			</div>
+		</div>
+	</div>
+</div>

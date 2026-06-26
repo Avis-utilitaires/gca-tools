@@ -1,0 +1,14 @@
+<div class="alert <?php echo($this->result ? 'alert-success' : 'alert-danger') ?>">
+	Pour les dossiers :
+	<?php foreach($this->folders as $folder){ ?>
+		<code><?php echo $folder ?></code><br>
+	<?php } ?>
+	<?php if ($this->result) { ?>
+		Les fichiers ".mo" suivants ont été généré : <?php echo implode(', ', $this->files); ?>.<br>
+	<?php } else { ?>
+		Une erreur s'est produite lors de la génération des fichier .mo. <br>
+		<pre>
+		<?php echo $this->msg ?>
+		</pre>
+	<?php } ?>
+</div>

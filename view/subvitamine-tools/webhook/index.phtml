@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<h3>Lancement de la WEBHook</h3>
+
+			<p>Cet outil permet de lancer la mise a jour des sources du site via Git</p>
+
+			<button class="btn btn-primary" onclick="runUpdate()">Lancer la mise à jour</button>
+		</div>
+		<script type="text/javascript">
+			var runUpdate = function () {
+				$.ajax({
+					"url": '<?php echo $this->url('tools', array('controller' => 'webhook', 'action' => 'run')); ?>',
+					"method": 'post',
+					"dataType": 'json',
+					"beforeSend": function(){
+						$('pre.result').html('');
+						$('.wait').removeClass('hide');
+					},
+					"complete": function(){
+						$('.wait').addClass('hide');
+					},
+					"success": function (response) {
+						$('pre.result').html(JSON.stringify(response));
+					}
+				});
+			}
+		</script>
+		<div class="text-center">
+				<span class="wait fa fa-cog fa-spin fa-5x hide">
+		</div>
+		<pre class="result" style="font-size: 90%;color: #fff;background-color: #333;">
+		</pre>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+nbproject
+._*
+.~lock.*
+*config.codekit
+.buildpath
+.DS_Store
+.project
+.settings
+composer.lock
+vendor/*
+

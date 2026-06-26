@@ -1,0 +1,13 @@
+<div class="alert <?php echo($this->result ? 'alert-success' : 'alert-danger') ?>">
+	<code><?php echo $this->folder ?></code><br>
+	<?php if ($this->result) { ?>
+		Le cache du dossier à bien été vidé.<br>
+		<?php echo $this->spared ?> Mo ont été libérés.
+	<?php } else { ?>
+		Une erreur s'est produite lors du vidage du dossier. <br>
+		Le cache n'a pas été vidé.<br>
+		<pre>
+		<?php echo $this->msg ?>
+		</pre>
+	<?php } ?>
+</div>

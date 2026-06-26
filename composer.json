@@ -1,0 +1,41 @@
+{
+  "name": "subvitaminetm/gca-tools",
+  "description": "Subvitamine Tools",
+  "type": "library",
+  "version": "1.0.1",
+  "keywords": [
+    "zf2"
+  ],
+  "homepage": "http://www.subvitamine.com/",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3.2",
+    "subvitaminetm/gca-libs": "dev-master",
+    "neilime/zf2-assets-bundle": "3.*@stable"
+  },
+  "authors": [
+        {
+            "name": "Subvitamine",
+            "email": "hello@subvitamine.com"
+        }
+    ],
+    "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "SubvitamineTools\\": "src"
+    },
+    "classmap": [
+      "src/SubvitamineTools/Module.php"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.zendframework.com/"
+    },
+    {
+      "type": "git",
+      "url": "git@bitbucket.org:subvitaminetm/gca-libs.git"
+    }
+  ]
+}

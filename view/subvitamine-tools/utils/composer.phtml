@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<h3>Mise a jour composer</h3>
+
+			<p>Cet outils sert à mettre à jour les dépendances du projet via composer</p>
+
+			<p>PHP >=5.5 est requis pour fonctionner correctement.</p>
+			<button class="btn btn-primary" onclick="runUpdate()">Lancer la mise à jour</button>
+		</div>
+		<script type="text/javascript">
+			var runUpdate = function () {
+				$.ajax({
+					"url": '<?php echo $this->url('tools', array('controller' => 'utils', 'action' => 'composer-update')); ?>',
+					"dataType": 'html',
+					"beforeSend": function(){
+						$('div.result').html('');
+						$('.wait').removeClass('hide');
+					},
+					"complete": function(){
+						$('.wait').addClass('hide');
+					},
+					"success": function (response) {
+						$('div.result').html(response);
+					}
+				});
+			}
+		</script>
+		<div class="text-center">
+				<span class="wait fa fa-cog fa-spin fa-5x hide">
+		</div>
+		<div class="result">
+		</div>
+	</div>
+</div>

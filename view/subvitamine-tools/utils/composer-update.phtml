@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-md-12">
+		<?php if ($this->code != 0) { ?>
+			<div class="alert alert-danger">
+				Something went wrong check the output underneath.<br>
+				The command return a status : <?php echo $this->code ?>
+			</div>
+		<?php } else { ?>
+			<div class="alert alert-success">
+				The command executed without errors (status : <?php echo $this->code ?>)
+			</div>
+		<?php } ?>
+		<pre style="font-size: 90%;color: #fff;background-color: #333;">
+<?php echo $this->errors; ?>
+<?php echo $this->output; ?>
+		</pre>
+	</div>
+</div>
