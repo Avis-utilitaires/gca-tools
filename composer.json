@@ -10,7 +10,7 @@
   "license": "MIT",
   "require": {
     "php": ">=5.3.2",
-    "subvitaminetm/gca-libs": "dev-master",
+    "subvitaminetm/gca-libs": "dev-main",
     "neilime/zf2-assets-bundle": "3.*@stable"
   },
   "authors": [
@@ -34,8 +34,8 @@
       "url": "https://packages.zendframework.com/"
     },
     {
-      "type": "git",
-      "url": "git@bitbucket.org:subvitaminetm/gca-libs.git"
+      "type": "vcs",
+      "url": "https://github.com/Avis-utilitaires/gca-libs.git"
     }
   ]
 }
